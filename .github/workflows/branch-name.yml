@@ -1,0 +1,32 @@
+name: Branch Name
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+
+permissions:
+  contents: read
+
+jobs:
+  validate-branch-name:
+    name: Validate Branch Name
+    if: ${{ !endsWith(github.actor, '[bot]') }}
+    runs-on: ubuntu-latest
+    env:
+      BRANCH_NAME: ${{ github.head_ref }}
+    steps:
+      - name: Check branch naming convention
+        run: |
+          pattern='^((feature|fix|hotfix|chore|docs|refactor|test|ci|build|release)/[a-z0-9._-]+|dependabot/.+)$'
+          if [[ "$BRANCH_NAME" =~ $pattern ]]; then
+            echo "Branch name is valid: $BRANCH_NAME"
+            exit 0
+          fi
+
+          echo "Invalid branch name: $BRANCH_NAME"
+          echo "Expected prefixes: feature/, fix/, hotfix/, chore/, docs/, refactor/, test/, ci/, build/, release/, or dependabot/"
+          exit 1

@@ -1,0 +1,35 @@
+name: Feature request
+description: Propose an improvement with clear value and scope.
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What problem are we solving?
+      placeholder: The current workflow makes it hard to ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the preferred solution or behavior.
+      placeholder: We should add support for ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: List other options or workarounds you considered.
+      placeholder: We also considered ...
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Expected impact
+      description: Describe the expected user, system, or team benefit.
+      placeholder: This would reduce setup time and lower review churn.
